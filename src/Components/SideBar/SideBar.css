@@ -16,6 +16,7 @@
 .SearchContent__img img {
     height: 90px;
     width: auto;
+    image-rendering: crisp-edges;
 }
 
 .listAtat {
@@ -29,4 +30,24 @@
 
 .listAtat__title {
     text-transform: uppercase;
+}
+
+.abilityBox {
+    padding: 30px 0;
+}
+
+.abilityHolder {
+    display: flex;
+    list-style: none;
+    flex-wrap: wrap;
+    margin: 20px 0;
+    padding: 0;
+
+}
+
+.abilityHolder li {
+    flex-grow: 1;
+    text-transform: capitalize;
+    font-weight: 500;
+    font-size: 15px;
 }

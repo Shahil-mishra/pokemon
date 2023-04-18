@@ -1,8 +1,7 @@
 import React from 'react'
 import './SideBar.css'
 
-export default function SideBar({ inputValue, pokemon }) {
-
+export default function SideBar({ inputValue, pokemon }) { 
     return (
         <div className='mainContent__sidebar'>
 
@@ -14,13 +13,27 @@ export default function SideBar({ inputValue, pokemon }) {
                     <h2 className='SearchContent__contentTitle'>{pokemon.name}</h2>
                     <p dangerouslySetInnerHTML={{ __html: pokemon.detail }}></p>
                     <ul className='listBox__lstname mb_10'>
-                        {pokemon && pokemon.types && pokemon.types.length > 0 && pokemon.types.map((cntnt, index) => {
+                        {pokemon?.types?.length > 0 && pokemon.types.map((cntnt, index) => {
                             return (
                                 <li key={index}>{cntnt.type.name}</li>
                             )
                         })}
                     </ul>
-                    {pokemon && pokemon.stats && pokemon.stats.length > 0 ? <>
+                    {pokemon?.abilities?.length > 0 ? <>
+                        <div className='abilityBox'>
+                            <h4>Abilities</h4>
+                            <ul className='abilityHolder'>
+                                {pokemon.abilities.map((detail, indx) => {
+                                    return (
+                                        <li key={indx}>{detail.ability.name}</li>
+                                    )
+                                })}
+
+                            </ul>
+                        </div>
+                    </> : null}
+
+                    {pokemon?.stats?.length > 0 ? <>
 
                         <ul className='listAtat listNone dflex alignItemsCenter'>
                             {pokemon.stats.map((data, index) => {
@@ -35,10 +48,10 @@ export default function SideBar({ inputValue, pokemon }) {
 
                                 )
                             })}
-                            <li>
+                            {/* <li>
                                 <div className='listAtat__title'>Tot</div>
                                 <div className='listAtat__value'>
-                                    {/* {pokemon && pokemon.stats && pokemon.stats.length > 0 && pokemon.stats.map((data, index) => {
+                                    {pokemon && pokemon.stats && pokemon.stats.length > 0 && pokemon.stats.map((data, index) => {
                                     return (
                                         <React.Fragment key={index}>
                                             {data.base_stat.reduce(
@@ -46,15 +59,15 @@ export default function SideBar({ inputValue, pokemon }) {
                                                 0)}
                                         </React.Fragment>
                                     )
-                                })} */}
+                                })}
                                 </div>
-                            </li>
+                            </li> */}
                         </ul>
-                    </>:null}
+                    </> : null}
 
-            </div>
+                </div>
             </div> : null
-}
+            }
         </div >
     )
 }

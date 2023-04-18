@@ -47,10 +47,10 @@
     height: 50px;
     border-radius: 50%;
     overflow: hidden;
-
     position: absolute;
     right: 0;
     top: 0;
+    cursor: pointer;
 }
 
 .searchBox__button img {

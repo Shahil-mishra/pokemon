@@ -20,7 +20,7 @@ export default function Home() {
                     name: res.data.name,
                     img: res.data.sprites.versions["generation-v"]["black-white"].animated.front_default,
                     detail: detail.data.flavor_text_entries[0].flavor_text,
-                    // abilities: res.data.abilities,
+                    abilities: res.data.abilities,
                     stats: res.data.stats,
                     types: res.data.types,                 
 
@@ -58,14 +58,14 @@ export default function Home() {
     }, [pokemon, inputValue])
 
     const updateInputValue = (e) => {
-        console.log("e.target.value", e.target.value)
+        // console.log("e.target.value", e.target.value)
         setInputValue(e.target.value)
     }
 
     const clickFn = () => {
         searchPokemon(inputValue)
     }
-    console.log("pokemon ", pokemon)
+    // console.log("pokemon ", pokemon)
     return (
 
         <>
@@ -80,7 +80,8 @@ export default function Home() {
                             return (
                                 <div className='listBox' key={index} onClick={() => showPokemon(data.name)}>
                                     <div className='listBox__img'>
-                                        <img src={data.sprites.front_default} alt='' />
+                                        {/* <img src={data.sprites.front_default} alt='' /> */}
+                                        <img src={data.sprites.other.dream_world.front_default} alt=''  />
                                     </div>
                                     <div className='listBox__cntnt'>
                                         <h4 className='listBox__title'>{data.name}</h4>
