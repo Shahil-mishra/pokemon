@@ -7,21 +7,19 @@ import axios from 'axios';
 
 export default function Home() {
     const [inputValue, setInputValue] = useState("")
+    const [bringSidebar, setBringSidebar] = useState(false)
     const [pokemon, setPokemon] = useState({})
     const [totalStat, settotalStat] = useState([])
 
     const [pokemonList, setPokemonList] = useState([])
 
     const searchPokemon = (name) => {
-        axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`).then((res) => {
-
+        let updatedname = name.toString().toLowerCase()
+        axios.get(`https://pokeapi.co/api/v2/pokemon/${updatedname}`).then((res) => {
             // console.log("res-121", res)
             let aryttl = []
             aryttl.push(res.data)
-            console.log("aryttl :-", aryttl)
             setPokemonList(aryttl)
-
-
         })
 
     }
@@ -33,7 +31,7 @@ export default function Home() {
                         setPokemonList(state => {
                             state = [...state, resp.data]
                             state.sort((a, b) => a.id > b.id ? 1 : -1)
-                            console.log("pokemonList :-", state)
+                            // console.log("pokemonList :-", state)
                             return state;
                             // [...pokemonList, resp.data]
                         })
@@ -49,6 +47,9 @@ export default function Home() {
 
     const showPokemon = useCallback((name) => {
         setInputValue(name)
+        setBringSidebar(false)
+
+      
         // searchPokemon(name)
         axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`).then((res) => {
 
@@ -66,12 +67,15 @@ export default function Home() {
                 })
             })
         })
+        setTimeout(() => {
+            setBringSidebar(true)
+            
+        }, 800);
     }, [pokemon, inputValue])
 
     const updateInputValue = (e) => {
         // console.log("e.target.value", e.target.value)
         let x = e.target.value
-
         if (x == "") {
             getPokemon()
         }
@@ -87,15 +91,21 @@ export default function Home() {
             searchPokemon(inputValue)
         }
     }
-    // console.log("pokemon ", pokemon)
+    console.log("pokemon ", pokemon)
+ 
     return (
 
         <>
             <SearchBox updateInputValue={updateInputValue} searchPokemon={clickFn} />
             <div className='mainContent'>
+               
+ 
                 <SideBar
                     inputValue={inputValue}
-                    pokemon={pokemon} />
+                    pokemon={pokemon} 
+                    showSidebar={bringSidebar}
+                />
+
                 <div className='mainContent__continer'>
                     <div className='listHolder'>
                         {pokemonList.length > 0 && pokemonList.map((data, index) => {

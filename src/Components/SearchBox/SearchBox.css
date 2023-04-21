@@ -57,3 +57,7 @@
     width: 20px;
     max-width: 100%;
 }
+
+.SearchContent__content .listBox__lstname  {
+    justify-content: center;
+}
