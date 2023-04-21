@@ -8,26 +8,20 @@ import axios from 'axios';
 export default function Home() {
     const [inputValue, setInputValue] = useState("")
     const [pokemon, setPokemon] = useState({})
-    const [totalStat, settotalStat]= useState([])
+    const [totalStat, settotalStat] = useState([])
 
     const [pokemonList, setPokemonList] = useState([])
 
     const searchPokemon = (name) => {
         axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`).then((res) => {
-            console.log("res-121", res)
-            axios.get(`https://pokeapi.co/api/v2/pokemon-species/${name}`).then((detail) => {
-                setPokemon({
-                    name: res.data.name,
-                    img: res.data.sprites.versions["generation-v"]["black-white"].animated.front_default,
-                    detail: detail.data.flavor_text_entries[0].flavor_text,
-                    abilities: res.data.abilities,
-                    stats: res.data.stats,
-                    types: res.data.types,                 
 
-                })
-                let aryttl = []
-                aryttl.push(res.data.types)
-            })
+            // console.log("res-121", res)
+            let aryttl = []
+            aryttl.push(res.data)
+            console.log("aryttl :-", aryttl)
+            setPokemonList(aryttl)
+
+
         })
 
     }
@@ -39,6 +33,7 @@ export default function Home() {
                         setPokemonList(state => {
                             state = [...state, resp.data]
                             state.sort((a, b) => a.id > b.id ? 1 : -1)
+                            console.log("pokemonList :-", state)
                             return state;
                             // [...pokemonList, resp.data]
                         })
@@ -54,16 +49,43 @@ export default function Home() {
 
     const showPokemon = useCallback((name) => {
         setInputValue(name)
-        searchPokemon(name)
+        // searchPokemon(name)
+        axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`).then((res) => {
+
+            console.log("res-121", res)
+
+            axios.get(`https://pokeapi.co/api/v2/pokemon-species/${name}`).then((detail) => {
+                setPokemon({
+                    name: res.data.name,
+                    img: res.data.sprites.versions["generation-v"]["black-white"].animated.front_default,
+                    detail: detail.data.flavor_text_entries[0].flavor_text,
+                    abilities: res.data.abilities,
+                    stats: res.data.stats,
+                    types: res.data.types,
+
+                })
+            })
+        })
     }, [pokemon, inputValue])
 
     const updateInputValue = (e) => {
         // console.log("e.target.value", e.target.value)
+        let x = e.target.value
+
+        if (x == "") {
+            getPokemon()
+        }
+        else {
+            searchPokemon(e.target.value)
+        }
         setInputValue(e.target.value)
+
     }
 
     const clickFn = () => {
-        searchPokemon(inputValue)
+        if (inputValue !== "") {
+            searchPokemon(inputValue)
+        }
     }
     // console.log("pokemon ", pokemon)
     return (
@@ -81,7 +103,7 @@ export default function Home() {
                                 <div className='listBox' key={index} onClick={() => showPokemon(data.name)}>
                                     <div className='listBox__img'>
                                         {/* <img src={data.sprites.front_default} alt='' /> */}
-                                        <img src={data.sprites.other.dream_world.front_default} alt=''  />
+                                        <img src={data.sprites.other.dream_world.front_default} alt='' />
                                     </div>
                                     <div className='listBox__cntnt'>
                                         <h4 className='listBox__title'>{data.name}</h4>
