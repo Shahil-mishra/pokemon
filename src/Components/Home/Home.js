@@ -2,12 +2,14 @@ import React, { useEffect, useState, useCallback } from 'react'
 // import Api from '../../../Container/Config/Api'
 import SideBar from '../SideBar/SideBar';
 import SearchBox from '../SearchBox/SearchBox';
+
 import './Home.css'
 import axios from 'axios';
 
 export default function Home() {
     const [inputValue, setInputValue] = useState("")
     const [bringSidebar, setBringSidebar] = useState(false)
+    const [wholeDate, setwholeDate] = useState({})
     const [pokemon, setPokemon] = useState({})
     const [totalStat, settotalStat] = useState([])
 
@@ -26,6 +28,7 @@ export default function Home() {
     const getPokemon = () => {
         axios.get(`https://pokeapi.co/api/v2/pokemon/`).then(async (res) => {
             if (res.data.results.length > 0) {
+                setwholeDate(res.data)
                 res.data.results.map(async (data) => {
                     axios.get(data.url).then((resp) => {
                         setPokemonList(state => {
@@ -49,7 +52,7 @@ export default function Home() {
         setInputValue(name)
         setBringSidebar(false)
 
-      
+
         // searchPokemon(name)
         axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`).then((res) => {
 
@@ -69,7 +72,7 @@ export default function Home() {
         })
         setTimeout(() => {
             setBringSidebar(true)
-            
+
         }, 800);
     }, [pokemon, inputValue])
 
@@ -92,17 +95,19 @@ export default function Home() {
         }
     }
     console.log("pokemon ", pokemon)
- 
+    console.log("wholeDate ", wholeDate)
+    // console.log("pokemonList ", pokemonList)
+
     return (
 
         <>
             <SearchBox updateInputValue={updateInputValue} searchPokemon={clickFn} />
             <div className='mainContent'>
-               
- 
+
+
                 <SideBar
                     inputValue={inputValue}
-                    pokemon={pokemon} 
+                    pokemon={pokemon}
                     showSidebar={bringSidebar}
                 />
 
@@ -132,9 +137,18 @@ export default function Home() {
                         })}
 
                     </div>
+
+
                 </div>
 
             </div>
+
+            <div className='buttonHolder text-center'>
+                {wholeDate.previous ? <button>PreviousPage</button> : null}
+                <button>Next Page</button>
+
+            </div>
+
         </>
 
 

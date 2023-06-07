@@ -51,6 +51,7 @@
     right: 0;
     top: 0;
     cursor: pointer;
+    pointer-events: none;
 }
 
 .searchBox__button img {
