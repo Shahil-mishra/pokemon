@@ -3,17 +3,30 @@ import pokemonImg from '../../Assets/images/pokemon.svg';
 import './SideBar.css'
 
 export default function SideBar({ inputValue, pokemon, showSidebar }) {
+    console.log("pokemon", pokemon)
     return (
         <div className={`mainContent__sidebar ${showSidebar ? "active" : null}`}>
 
             {showSidebar ?
                 <div className="SearchContent">
                     <div className='SearchContent__img'>
-                        <img src={pokemon.img} alt="" />
+                        <img src={pokemon?.img} alt="" />
                     </div>
+
                     <div className='SearchContent__content'>
                         <h2 className='SearchContent__contentTitle'>{pokemon.name}</h2>
                         <p dangerouslySetInnerHTML={{ __html: pokemon.detail }}></p>
+                        <ul className='abilityHolder'>
+                            <li className=' '>
+                                <h4>Height</h4>
+                                <div >{pokemon?.height / 10}m</div>
+                            </li>
+                            <li className=' '>
+                                <h4>Weight</h4>
+                                <div >{pokemon?.weight / 10}kg</div>
+                            </li>
+                        </ul>
+
                         <ul className='listBox__lstname mb_10'>
                             {pokemon?.types?.length > 0 && pokemon.types.map((cntnt, index) => {
                                 return (
@@ -73,14 +86,12 @@ export default function SideBar({ inputValue, pokemon, showSidebar }) {
                     <div className='SearchContent__img '>
                         <img src={pokemonImg} alt="" />
                     </div>
-                    <div className='SearchContent__content'>
-                    <h3>Select any pokemon to know the Details</h3>
+                    <div className='SearchContent__content mb-2'>
+                        <h3>Select any pokemon to know the Details</h3>
                     </div>
                     <a className="card" id="card-link" target="_blank">
-                        <div className="card__header">
-                            <div>
-                                <img className="card__header header__img skeleton" id="logo-img" alt="" />
-                            </div>
+                        <div className="card__header ">
+                             
                             <h3 className="card__header header__title" id="card-title">
                                 <div className="skeleton skeleton-text"></div>
                                 <div className="skeleton skeleton-text"></div>
@@ -96,7 +107,7 @@ export default function SideBar({ inputValue, pokemon, showSidebar }) {
                                 <img className="skeleton" alt="" id="cover-img" />
                             </div>
                         </div>
- 
+
                     </a>
                 </div>
             }

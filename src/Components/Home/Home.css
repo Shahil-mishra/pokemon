@@ -57,3 +57,23 @@
      object-fit: contain;
 
  }
+
+ .buttonHolder {
+    padding: 15px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+ }
+ .buttonHolder button {
+	border: 0;
+	padding: 10px 25px;
+	background: #ffcb05;
+	color: #000;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+}
+ .buttonHolder button:hover { 
+	background: #c7a008;
+	color: #000; 
+}
