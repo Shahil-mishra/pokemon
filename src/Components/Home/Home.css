@@ -8,13 +8,13 @@
      text-align: center;
      box-shadow: 0px 27px 29px -10px rgba(0, 0, 0, 0.12);
      border-radius: 7px;
-     padding: 30px 20px ;
+     padding: 30px 20px;
      display: flex;
      align-items: center;
  }
 
  .listBox__img {
-     flex: 0 0 120px; 
+     flex: 0 0 120px;
      max-width: 120px;
  }
 
@@ -39,6 +39,7 @@
      list-style: none;
      display: flex;
      justify-content: flex-start;
+     flex-wrap: wrap;
  }
 
  .listBox__lstname li {
@@ -59,21 +60,71 @@
  }
 
  .buttonHolder {
-    padding: 15px 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
+     padding: 15px 0;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     gap: 10px;
  }
+
  .buttonHolder button {
-	border: 0;
-	padding: 10px 25px;
-	background: #ffcb05;
-	color: #000;
-    cursor: pointer;
-    transition: 0.2s ease-in-out;
-}
- .buttonHolder button:hover { 
-	background: #c7a008;
-	color: #000; 
-}
+     border: 0;
+     padding: 10px 25px;
+     background: #ffcb05;
+     color: #000;
+     cursor: pointer;
+     transition: 0.2s ease-in-out;
+ }
+
+ .buttonHolder button:hover {
+     background: #c7a008;
+     color: #000;
+ }
+
+ @media only screen and (max-width: 1400px) {
+     .listHolder {
+         grid-template-columns: repeat(3, 1fr);
+         grid-gap: 15px;
+     }
+
+     .listBox__img {
+         flex: 0 0 89px;
+         max-width: 89px;
+     }
+
+     .listBox__cntnt {
+         flex-basis: calc(100% - 89px);
+         max-width: calc(100% - 89px);
+         text-align: left;
+         padding-left: 10px;
+     }
+
+     .listBox {
+         padding: 25px 15px;
+     }
+ }
+
+ @media only screen and (max-width: 1250px) {
+     .listBox {
+         display: block;
+     }
+
+     .listBox__img {
+         flex: 0 0 100px;
+         max-width: 100px;
+     }
+
+     .listBox__cntnt {
+         flex-basis: 100%;
+         max-width: 100%;
+     }
+ }
+
+ @media only screen and (max-width: 991px) {
+     .listHolder {
+         grid-template-columns: repeat(2, 1fr); 
+     }
+     .mainContent__sidebar { 
+        max-width: 300px; 
+    }
+ }
