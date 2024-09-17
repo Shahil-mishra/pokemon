@@ -34,8 +34,8 @@
    font-family: "Inter", sans-serif, ui-sans-serif, system-ui, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
    font-weight: 400;
    line-height: 1.4;
-   letter-spacing: 0.02em;
-   font: 1.1em;
+   letter-spacing: 0.01em;
+   font-size: 1em;
    background: #efefe6;
  }
 
@@ -564,15 +564,18 @@
 
  .buttonHolder button {
    border: 0;
-   padding: 10px 25px;
-   background: #ffcb05;
+   padding: 12px 25px;
+   background: #72DDF7;
    color: #000;
    cursor: pointer;
-   transition: 0.2s ease-in-out;
+   font-size: 1rem;
+   font-weight: 600;
+   transition: all 0.3s ease-in-out;
+   border-radius: 3rem;
  }
 
  .buttonHolder button:hover {
-   background: #c7a008;
+   background: #0DBCE7;
    color: #000;
  }
 
@@ -667,16 +670,32 @@
  }
 
  .listAtat {
-   justify-content: space-between;
    margin: 15px 0;
+   gap: 10px;
+   justify-content: center;
+ }
+
+ .listAtat li {
+   color: #fff;
+   border-radius: 5px;
+ }
+
+ .listAtat li:nth-child(even) {
+   background: #8093F1;
+ }
+
+ .listAtat li:nth-child(odd) {
+   background: #B388EB;
  }
 
  .listAtat li div {
-   padding: 4px;
+   padding: 7px;
  }
 
- .listAtat__title {
+ .listAtat li div.listAtat__title {
    text-transform: uppercase;
+   font-weight: 600;
+   padding-bottom: 0;
  }
 
  .abilityBox {
@@ -695,7 +714,7 @@
  .abilityHolder li {
    flex-grow: 1;
    text-transform: capitalize;
-   font-weight: 500;
+   font-weight: 600;
    font-size: 15px;
  }
 
