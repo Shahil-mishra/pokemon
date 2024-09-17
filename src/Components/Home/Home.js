@@ -4,9 +4,7 @@ import SideBar from '../SideBar/SideBar';
 import SearchBox from '../SearchBox/SearchBox';
 import pokemonImg from '../../Assets/images/pokemon.svg';
 import './Home.css'
-import axios from 'axios';
-import 'react-toastify/dist/ReactToastify.css';
-import { ToastContainer, toast } from 'react-toastify';
+import axios from 'axios'; 
 export default function Home() {
     const [loading, setloading] = useState(true)
     const [currentpage, setCurrentpage] = useState(0)
@@ -29,7 +27,7 @@ export default function Home() {
 
             }).catch(function (error) {
                 // handle error
-                toast(error)
+                alert(error)
             })
         }, 1000);
     }
@@ -176,8 +174,8 @@ export default function Home() {
                     </div>
                 </div>}
             <div className='buttonHolder text-center'>
-                {wholeDate.previous ? <button onClick={goToPrevPage}>PreviousPage</button> : null}
-                {wholeDate.next ? <button onClick={goToNextPage}>Next Page</button> : null}
+                {wholeDate.previous ? <button onClick={goToPrevPage}>Previous </button> : null}
+                {wholeDate.next ? <button onClick={goToNextPage}>Next</button> : null}
             </div>
         </>
     )
