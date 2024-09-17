@@ -5,7 +5,8 @@ import SearchBox from '../SearchBox/SearchBox';
 import pokemonImg from '../../Assets/images/pokemon.svg';
 import './Home.css'
 import axios from 'axios';
-
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify';
 export default function Home() {
     const [loading, setloading] = useState(true)
     const [currentpage, setCurrentpage] = useState(0)
@@ -28,7 +29,7 @@ export default function Home() {
 
             }).catch(function (error) {
                 // handle error
-                console.log(error);
+                toast(error)
             })
         }, 1000);
     }
@@ -67,18 +68,19 @@ export default function Home() {
         // searchPokemon(name)
         axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`).then((res) => {
 
-            console.log("res-121", res)
+            // console.log("res-121", res)
 
             axios.get(`https://pokeapi.co/api/v2/pokemon-species/${name}`).then((detail) => {
                 setPokemon({
-                    name: res.data.name,
-                    img: res.data.sprites.versions["generation-v"]["black-white"].animated.front_default,
-                    detail: detail.data.flavor_text_entries[0].flavor_text,
-                    abilities: res.data.abilities,
-                    stats: res.data.stats,
-                    types: res.data.types,
-                    height: res.data.height,
-                    weight: res.data.weight,
+                    name: res?.data?.name,
+                    img: res?.data?.sprites.versions["generation-v"]["black-white"].animated.front_default,
+                    detail: detail?.data?.flavor_text_entries[0].flavor_text,
+                    abilities: res?.data?.abilities,
+                    stats: res?.data?.stats,
+                    types: res?.data?.types,
+                    height: res?.data?.height,
+                    weight: res?.data?.weight,
+                    id:  res?.data?.id,
 
                 })
             })
@@ -109,7 +111,7 @@ export default function Home() {
     }
     // console.log("pokemon ", pokemon)
     // console.log("wholeDate ", wholeDate)
-    // console.log("pokemonList ", pokemonList)
+
 
     const goToPrevPage = () => {
         if (currentpage > 0) {
@@ -128,7 +130,10 @@ export default function Home() {
 
     }, [currentpage])
 
-    console.log("currentpage ", currentpage)
+    console.log("pokemonList ", pokemonList)
+    console.log("id ", pokemon?.id )
+
+    // console.log("currentpage ", currentpage)
 
     return (
         <>
@@ -149,7 +154,7 @@ export default function Home() {
                         <div className='listHolder'>
                             {pokemonList.length > 0 && pokemonList.map((data, index) => {
                                 return (
-                                    <div className='listBox' key={index} onClick={() => showPokemon(data.name)}>
+                                    <div className={`listBox ${pokemon?.id == data.id ? "active" : "" }`} key={index} onClick={() => showPokemon(data.name)}>
                                         <div className='listBox__img'>
                                             {/* <img src={data.sprites.front_default} alt='' /> */}
                                             <img src={data.sprites.other.dream_world.front_default} alt='' />
