@@ -1,0 +1,64 @@
+.searchBox {
+    background: #fff;
+    padding: 10px;
+    text-align: center;
+    /* position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 99; */
+
+}
+
+
+
+
+.searchBox__holder {
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    display: flex;
+    position: relative;
+    width: calc(100% - 30px);
+    max-width: 700px;
+    margin: 0 auto;
+    border-radius: 7px;
+}
+
+.searchBox__input {
+    width: 100%;
+    height: 50px;
+    padding: 10px 15px;
+    border: 0;
+    border-radius: 7px;
+    outline: 0;
+}
+
+.searchBox__input:focus,
+.searchBox__input:focus-within,
+.searchBox__input:visited,
+.searchBox__input:focus-visible {
+    border: 0;
+    outline: 0;
+}
+
+.searchBox__button {
+    border: 0;
+    background: transparent;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    position: absolute;
+    right: 0;
+    top: 0;
+    cursor: pointer;
+    pointer-events: none;
+}
+
+.searchBox__button img {
+    width: 20px;
+    max-width: 100%;
+}
+
+.SearchContent__content .listBox__lstname  {
+    justify-content: center;
+}
